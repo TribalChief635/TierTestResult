@@ -13,25 +13,37 @@ color:white;
 margin:0;
 }
 
+/* Page title */
 .title{
 text-align:center;
 font-size:32px;
 padding:20px;
 font-weight:bold;
+animation:fadein 1s ease;
 }
 
+/* Container animation */
 .container{
 display:flex;
 gap:20px;
 padding:20px;
 justify-content:center;
+animation:fadein 1s ease;
 }
 
+/* Tier cards */
 .tier{
 background:#1b2538;
 border-radius:8px;
 width:220px;
 min-height:200px;
+transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Tier hover animation */
+.tier:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
 }
 
 .tier h2{
@@ -40,16 +52,48 @@ padding:10px;
 margin:0;
 }
 
-.tierS{background:#ff4d4d;}
+/* Tier colors */
+.tierS{
+background:#ff4d4d;
+box-shadow:0 0 12px rgba(255,77,77,0.8);
+}
+
 .tierA{background:#ff944d;}
 .tierB{background:#ffd24d;}
 .tierC{background:#4da6ff;}
 .tierD{background:#2a3248;}
 
+/* Player rows */
 .name{
 padding:8px;
 border-top:1px solid #2c3550;
 cursor:grab;
+transition:all 0.25s ease;
+}
+
+/* Player hover animation */
+.name:hover{
+transform:translateX(4px);
+background:#24304a;
+box-shadow:0 0 6px rgba(255,255,255,0.25);
+}
+
+/* Dragging effect */
+.name:active{
+cursor:grabbing;
+transform:scale(1.03);
+}
+
+/* Page fade animation */
+@keyframes fadein{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 </style>
@@ -67,39 +111,40 @@ cursor:grab;
 <div class="name" draggable="true" ondragstart="drag(event)" id="p1">Tribal Chief</div>
 <div class="name" draggable="true" ondragstart="drag(event)" id="p2">Hazem_65</div>
 <div class="name" draggable="true" ondragstart="drag(event)" id="p3">oth0098</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p3">L1CH</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p3">oth0098</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p3">oth0098</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p3">oth0098</div>  
+<div class="name" draggable="true" ondragstart="drag(event)" id="p4">L1CH</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p5">oth0098</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p6">oth0098</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p7">oth0098</div>
+
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierA">A</h2>
 
-<div class="name" draggable="true" ondragstart="drag(event)" id="p4">Player4</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p5">Player5</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p8">Player4</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p9">Player5</div>
 
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierB">B</h2>
 
-<div class="name" draggable="true" ondragstart="drag(event)" id="p6">Player6</div>
-<div class="name" draggable="true" ondragstart="drag(event)" id="p7">Player7</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p10">Player6</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p11">Player7</div>
 
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierC">C</h2>
 
-<div class="name" draggable="true" ondragstart="drag(event)" id="p8">Player8</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p12">Player8</div>
 
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierD">D</h2>
 
-<div class="name" draggable="true" ondragstart="drag(event)" id="p9">Player9</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p13">Player9</div>
 
 </div>
 
@@ -125,5 +170,3 @@ ev.target.closest(".tier").appendChild(document.getElementById(data));
 
 </body>
 </html>
-
-
