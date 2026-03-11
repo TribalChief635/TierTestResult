@@ -31,6 +31,7 @@ justify-content:center;
 background:#1b2538;
 border-radius:8px;
 width:220px;
+min-height:200px;
 }
 
 .tier h2{
@@ -48,6 +49,7 @@ margin:0;
 .name{
 padding:8px;
 border-top:1px solid #2c3550;
+cursor:grab;
 }
 
 </style>
@@ -59,46 +61,64 @@ border-top:1px solid #2c3550;
 
 <div class="container">
 
-<div class="tier">
+<div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierS">S</h2>
 
-<div class="name">Tribal Chief</div>
-<div class="name">Hazem_65</div>
-<div class="name">oth0098</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p1">Tribal Chief</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p2">Hazem_65</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p3">oth0098</div>
 
 </div>
 
-<div class="tier">
+<div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierA">A</h2>
 
-<div class="name">Player4</div>
-<div class="name">Player5</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p4">Player4</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p5">Player5</div>
 
 </div>
 
-<div class="tier">
+<div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierB">B</h2>
 
-<div class="name">Player6</div>
-<div class="name">Player7</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p6">Player6</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p7">Player7</div>
 
 </div>
 
-<div class="tier">
+<div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierC">C</h2>
 
-<div class="name">Player8</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p8">Player8</div>
 
 </div>
 
-<div class="tier">
+<div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierD">D</h2>
 
-<div class="name">Player9</div>
+<div class="name" draggable="true" ondragstart="drag(event)" id="p9">Player9</div>
 
 </div>
 
 </div>
+
+<script>
+
+function allowDrop(ev) {
+ev.preventDefault();
+}
+
+function drag(ev) {
+ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+ev.preventDefault();
+var data = ev.dataTransfer.getData("text");
+ev.target.closest(".tier").appendChild(document.getElementById(data));
+}
+
+</script>
 
 </body>
 </html>
