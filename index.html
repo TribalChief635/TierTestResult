@@ -7,55 +7,81 @@
 <style>
 
 body{
-background:#0b1220;
-font-family:Arial;
-color:white;
-margin:0;
+  background:#0b1220;
+  font-family:Arial;
+  color:white;
+  margin:0;
 }
 
 /* Page title */
 .title{
-text-align:center;
-font-size:32px;
-padding:20px;
-font-weight:bold;
-animation:fadein 1s ease;
+  text-align:center;
+  font-size:36px;
+  padding:20px;
+  font-weight:bold;
+  animation:fadein 1s ease;
+  text-shadow: 0 0 10px #ff4d4d;
 }
 
 /* Container animation */
 .container{
-display:flex;
-gap:20px;
-padding:20px;
-justify-content:center;
-animation:fadein 1s ease;
+  display:flex;
+  gap:20px;
+  padding:20px;
+  justify-content:center;
+  animation:fadein 1s ease;
 }
 
 /* Tier cards */
 .tier{
-background:#1b2538;
-border-radius:8px;
-width:220px;
-min-height:200px;
-transition:transform 0.25s ease, box-shadow 0.25s ease;
+  background:#1b2538;
+  border-radius:10px;
+  width:240px;
+  min-height:220px;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Tier hover animation */
 .tier:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 20px rgba(0,0,0,0.4);
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.5);
 }
 
 .tier h2{
-text-align:center;
-padding:10px;
-margin:0;
+  text-align:center;
+  padding:15px;
+  margin:0;
+  font-weight:bold;
 }
 
-/* Tier colors */
+/* Tier colors and special effects */
 .tierS{
-background:#ff4d4d;
-box-shadow:0 0 12px rgba(255,77,77,0.8);
+  background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+  box-shadow:0 0 20px #ff4d4d, 0 0 40px #ff1a1a;
+  font-size:28px;
+  color:#fff;
+  text-shadow:0 0 10px #fff, 0 0 20px #ff4d4d;
+  border:2px solid #ffd700;
+  border-radius:12px;
+  position:relative;
+}
+
+/* Glow animation for S tier */
+.tierS::before{
+  content:"🏆 TOP TIER";
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:14px;
+  color:#ffd700;
+  text-shadow:0 0 8px #ffd700;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  0% {text-shadow:0 0 5px #ffd700;}
+  100% {text-shadow:0 0 15px #ffd700, 0 0 25px #ff4d4d;}
 }
 
 .tierA{background:#ff944d;}
@@ -65,35 +91,36 @@ box-shadow:0 0 12px rgba(255,77,77,0.8);
 
 /* Player rows */
 .name{
-padding:8px;
-border-top:1px solid #2c3550;
-cursor:grab;
-transition:all 0.25s ease;
+  padding:10px;
+  border-top:1px solid #2c3550;
+  cursor:grab;
+  transition:all 0.25s ease;
+  border-radius:4px;
 }
 
 /* Player hover animation */
 .name:hover{
-transform:translateX(4px);
-background:#24304a;
-box-shadow:0 0 6px rgba(255,255,255,0.25);
+  transform:translateX(4px);
+  background:#24304a;
+  box-shadow:0 0 8px rgba(255,255,255,0.3);
 }
 
 /* Dragging effect */
 .name:active{
-cursor:grabbing;
-transform:scale(1.03);
+  cursor:grabbing;
+  transform:scale(1.03);
 }
 
 /* Page fade animation */
 @keyframes fadein{
-from{
-opacity:0;
-transform:translateY(15px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 </style>
@@ -107,60 +134,46 @@ transform:translateY(0);
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierS">S</h2>
-
 <div class="name" draggable="true" ondragstart="drag(event)" id="p1">Zerottick</div>
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierA">A</h2>
-
 <div class="name" draggable="true" ondragstart="drag(event)" id="p8">raifgamingyt</div>
-
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierB">B</h2>
-
 <div class="name" draggable="true" ondragstart="drag(event)" id="p10">HelexMC</div>
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierC">C</h2>
-
 <div class="name" draggable="true" ondragstart="drag(event)" id="p12">Gojocookie</div>
-
 </div>
 
 <div class="tier" ondrop="drop(event)" ondragover="allowDrop(event)">
 <h2 class="tierD">D</h2>
-
 <div class="name" draggable="true" ondragstart="drag(event)" id="p13"></div>
-
 </div>
 
 </div>
 
 <script>
-
 function allowDrop(ev) {
-ev.preventDefault();
+  ev.preventDefault();
 }
 
 function drag(ev) {
-ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("text", ev.target.id);
 }
 
 function drop(ev) {
-ev.preventDefault();
-var data = ev.dataTransfer.getData("text");
-ev.target.closest(".tier").appendChild(document.getElementById(data));
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.closest(".tier").appendChild(document.getElementById(data));
 }
-
 </script>
 
 </body>
 </html>
-
-
-
-
